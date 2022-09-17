@@ -11,7 +11,9 @@ let Token =
 let GuildID = "756364115437551637"; //Phwee and Aethy's Guild ID
 const { Client, GatewayIntentBits } = require("discord.js");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+console.log("Loaded...");
 client.on("guildMemberUpdate", () => {
+    console.log("Role Changed...");
     let hasKittenRole = false;
     let hasPhweakRole = false;
     let hasNewRole = false;
