@@ -20,9 +20,9 @@ client.on("guildMemberUpdate", () => {
         m.roles.cache.some((r) => {
             if (r.name.toLowerCase().includes("kittens")) hasKittenRole = true;
             else if (r.name.toLowerCase().includes("phweaks")) hasPhweakRole = true;
-            else if (r.name.toLowerCase().includes("CHANGE_ME")) hasNewRole = true;
+            else if (r.name.toLowerCase().includes("phweettens")) hasNewRole = true;
         });
-        let NewRole = m.guild.roles.cache.find((r2) => r2.name === "CHANGE_ME");
+        let NewRole = m.guild.roles.cache.find((r2) => r2.name.toLowerCase().includes("phweettens"));
         if (hasKittenRole && hasPhweakRole && !hasNewRole) m.roles.add(NewRole);
         else if (!hasKittenRole || !hasPhweakRole) m.roles.remove(NewRole);
     });
