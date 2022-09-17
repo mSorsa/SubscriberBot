@@ -3,7 +3,7 @@ let GuildID = "988489593466810398";
 console.log("Loaded...");
 const { Client, GatewayIntentBits } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-client.once('ready', () => {
+client.once('roleUpdate', () => {
     let hasKittenRole = false;
     let hasPhweakRole = false;
     let hasNewRole = false;
@@ -22,6 +22,7 @@ client.once('ready', () => {
 
 
 // Phwee code - Working with Phwee access
+// let GuildID = "756364115437551637"; //Phwee's Guild
 // console.log("Loaded...");
 // const { Client, GatewayIntentBits } = require('discord.js');
 // const client = new Client({ intents: [GatewayIntentBits.Guilds] });
