@@ -1,1 +1,1 @@
-Worker: node ./src/PhweeBot.js
+Worker: node PhweeBot.js
