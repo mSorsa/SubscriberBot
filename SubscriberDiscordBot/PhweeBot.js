@@ -1,17 +1,18 @@
 /*
     To-Do:
         Have Phwee and Aethy name the bot.
-        Have Phwee add bot to discord. (I can send link)
+        Have Phwee add bot to discord and place it higher than all three roles. (I can send link)
         Have Phwee add new role to her discord. (Aethy and Phwee subs)
         Change code to adopt new role.
         Test Code - Hopefully works right the first time. (Super-Ultra Rare, 9.5 VGA graded collectible)
 */
 let Token =
-  "MTAyMDE0NjE0MDc3MzEwNTcyNQ.GLiojV.A7u4twOvz0ssPiyvVlmIRjnDiYLBmfSYRjsTOA";
+  "MTAyMDE0NjE0MDc3MzEwNTcyNQ.GLJ2aI.b0WNfQTEBgp1mtx5Jkm2xw16TgAEsJSBXKZmRY";
+
 let GuildID = "756364115437551637"; //Phwee and Aethy's Guild ID
 const { Client, GatewayIntentBits } = require("discord.js");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-client.once("guildMemberUpdate", () => {
+client.on("guildMemberUpdate", () => {
   let hasKittenRole = false;
   let hasPhweakRole = false;
   let hasNewRole = false;
@@ -27,7 +28,6 @@ client.once("guildMemberUpdate", () => {
     else if (!hasKittenRole || !hasPhweakRole) m.roles.remove(NewRole);
   });
 });
-client.login(Token);
 
 // On Ready - Works - My Guild
 // let GuildID = "988489593466810398";
@@ -59,4 +59,5 @@ client.login(Token);
 //   });
 // });
 
+client.login(Token);
 // Token Copy: MTAyMDE0NjE0MDc3MzEwNTcyNQ.GLiojV.A7u4twOvz0ssPiyvVlmIRjnDiYLBmfSYRjsTOA
