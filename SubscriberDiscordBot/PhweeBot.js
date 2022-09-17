@@ -1,65 +1,67 @@
-/*
-    To-Do:
-        Have Phwee and Aethy name the bot.
-        Have Phwee add bot to discord and place it higher than all three roles. (I can send link)
-        Have Phwee add new role to her discord. (Aethy and Phwee subs)
-        Change code to adopt new role.
-        Test Code - Hopefully works right the first time. (Super-Ultra Rare, 9.5 VGA graded collectible)
-*/
 let Token =
     "MTAyMDE0NjE0MDc3MzEwNTcyNQ.GLJ2aI.b0WNfQTEBgp1mtx5Jkm2xw16TgAEsJSBXKZmRY";
-let GuildID = "756364115437551637"; //Phwee and Aethy's Guild ID
-const { Client, GatewayIntentBits } = require("discord.js");
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+let GuildID = "756364115437551637";
 console.log("Loaded...");
+const { Client, GatewayIntentBits } = require("discord.js");
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers] });
 client.on("guildMemberUpdate", () => {
-    console.log("Role Changed...");
-    let hasKittenRole = false;
-    let hasPhweakRole = false;
-    let hasNewRole = false;
     const Guild = client.guilds.cache.get(GuildID);
-    Guild.members.cache.forEach((m) => {
-        m.roles.cache.some((r) => {
-            if (r.name.toLowerCase().includes("kittens")) hasKittenRole = true;
-            else if (r.name.toLowerCase().includes("phweaks")) hasPhweakRole = true;
-            else if (r.name.toLowerCase().includes("phweettens")) hasNewRole = true;
+    Guild.members.fetch().then((ListOfMembers) => {
+        ListOfMembers.forEach((Individual) => {
+            let hasKittenRole = false;
+            let hasPhweakRole = false;
+            let hasNewRole = false;
+            Individual.roles.cache.forEach((UserRole) => {
+                if (UserRole.name.toLowerCase().includes("kittens")) {
+                    hasKittenRole = true;
+                } else if (UserRole.name.toLowerCase().includes("phweaks")) {
+                    hasPhweakRole = true;
+                } else if (UserRole.name.toLowerCase().includes("phweettens")) {
+                    hasNewRole = true;
+                }
+            });
+            //The following lines run ASYNC and takes a while for the results to show on DISCORD...
+            let NewRole = Individual.guild.roles.cache.find((NewRole) => NewRole.name.toLowerCase().includes("phweettens"));
+            if (hasKittenRole && hasPhweakRole && !hasNewRole) {
+                Individual.roles.add(NewRole);
+            } else if (!hasKittenRole || !hasPhweakRole) {
+                Individual.roles.remove(NewRole)
+            }
         });
-        let NewRole = m.guild.roles.cache.find((r2) => r2.name.toLowerCase().includes("phweettens"));
-        if (hasKittenRole && hasPhweakRole && !hasNewRole) m.roles.add(NewRole);
-        else if (!hasKittenRole || !hasPhweakRole) m.roles.remove(NewRole);
     });
 });
 client.login(Token);
 
-// Uncomment for testing purposes - Used in my guild.
-// let GuildID = "988489593466810398"; //BearTheCoder's Guild
+
+//My Guild
+// let GuildID = "988489593466810398";
 // console.log("Loaded...");
 // const { Client, GatewayIntentBits } = require("discord.js");
-// const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+// const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers] });
 // client.on("guildMemberUpdate", () => {
-//     console.log("Role Change...");
-//     let hasKittenRole = false;
-//     let hasPhweakRole = false;
-//     let hasNewRole = false;
-//     const Guild = client.guilds.cache.get(GuildID);
-//     Guild.members.cache.forEach((m) => {
-//         m.roles.cache.forEach((r) => {
-//             if (r.name.toLowerCase().includes("test1")) {
-//                 hasKittenRole = true;
-//             } else if (r.name.toLowerCase().includes("test2")) {
-//                 hasPhweakRole = true;
-//             } else if (r.name.toLowerCase().includes("Cub")) {
-//                 hasNewRole = true;
+//     const GuildTest = client.guilds.cache.get(GuildID);
+//     console.log(`GuildTest: ${GuildTest}`);
+//     GuildTest.members.fetch().then((ListOfMembers) => {
+//         ListOfMembers.forEach((Individual) => {
+//             let hasKittenRole = false;
+//             let hasPhweakRole = false;
+//             let hasNewRole = false;
+//             Individual.roles.cache.forEach((UserRole) => {
+//                 if (UserRole.name.toLowerCase().includes("test1")) {
+//                     hasKittenRole = true;
+//                 } else if (UserRole.name.toLowerCase().includes("test2")) {
+//                     hasPhweakRole = true;
+//                 } else if (UserRole.name.toLowerCase().includes("cub")) {
+//                     hasNewRole = true;
+//                 }
+//             });
+//             let NewRole = Individual.guild.roles.cache.find((NewRole) => NewRole.name.toLowerCase().includes("cub"));
+//             if (hasKittenRole && hasPhweakRole && !hasNewRole) {
+//                 Individual.roles.add(NewRole);
+//             } else if (!hasKittenRole || !hasPhweakRole) {
+//                 Individual.roles.remove(NewRole)
 //             }
 //         });
-//         let NewRole = m.guild.roles.cache.find((r2) => r2.name === "Cub");
-//         if (hasKittenRole && hasPhweakRole && !hasNewRole) {
-//             m.roles.add(NewRole);
-//         } else if (!hasKittenRole || !hasPhweakRole) {
-//             m.roles.remove(NewRole);
-//         }
 //     });
 // });
 // client.login(Token);
-
-// Token Copy: MTAyMDE0NjE0MDc3MzEwNTcyNQ.GLiojV.A7u4twOvz0ssPiyvVlmIRjnDiYLBmfSYRjsTOA
