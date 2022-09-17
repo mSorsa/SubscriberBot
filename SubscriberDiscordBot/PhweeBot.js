@@ -7,57 +7,57 @@
         Test Code - Hopefully works right the first time. (Super-Ultra Rare, 9.5 VGA graded collectible)
 */
 let Token =
-  "MTAyMDE0NjE0MDc3MzEwNTcyNQ.GLJ2aI.b0WNfQTEBgp1mtx5Jkm2xw16TgAEsJSBXKZmRY";
-
+    "MTAyMDE0NjE0MDc3MzEwNTcyNQ.GLJ2aI.b0WNfQTEBgp1mtx5Jkm2xw16TgAEsJSBXKZmRY";
 let GuildID = "756364115437551637"; //Phwee and Aethy's Guild ID
 const { Client, GatewayIntentBits } = require("discord.js");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.on("guildMemberUpdate", () => {
-  let hasKittenRole = false;
-  let hasPhweakRole = false;
-  let hasNewRole = false;
-  const Guild = client.guilds.cache.get(GuildID);
-  Guild.members.cache.forEach((m) => {
-    m.roles.cache.some((r) => {
-      if (r.name.toLowerCase().includes("kittens")) hasKittenRole = true;
-      else if (r.name.toLowerCase().includes("phweaks")) hasPhweakRole = true;
-      else if (r.name.toLowerCase().includes("CHANGE_ME")) hasNewRole = true;
+    let hasKittenRole = false;
+    let hasPhweakRole = false;
+    let hasNewRole = false;
+    const Guild = client.guilds.cache.get(GuildID);
+    Guild.members.cache.forEach((m) => {
+        m.roles.cache.some((r) => {
+            if (r.name.toLowerCase().includes("kittens")) hasKittenRole = true;
+            else if (r.name.toLowerCase().includes("phweaks")) hasPhweakRole = true;
+            else if (r.name.toLowerCase().includes("CHANGE_ME")) hasNewRole = true;
+        });
+        let NewRole = m.guild.roles.cache.find((r2) => r2.name === "CHANGE_ME");
+        if (hasKittenRole && hasPhweakRole && !hasNewRole) m.roles.add(NewRole);
+        else if (!hasKittenRole || !hasPhweakRole) m.roles.remove(NewRole);
     });
-    let NewRole = m.guild.roles.cache.find((r2) => r2.name === "CHANGE_ME");
-    if (hasKittenRole && hasPhweakRole && !hasNewRole) m.roles.add(NewRole);
-    else if (!hasKittenRole || !hasPhweakRole) m.roles.remove(NewRole);
-  });
 });
+client.login(Token);
 
-// On Ready - Works - My Guild
-// let GuildID = "988489593466810398";
+// Uncomment for testing purposes - Used in my guild.
+// let GuildID = "988489593466810398"; //BearTheCoder's Guild
 // console.log("Loaded...");
 // const { Client, GatewayIntentBits } = require("discord.js");
 // const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 // client.on("guildMemberUpdate", () => {
-//   console.log("Role Change...");
-//   let hasKittenRole = false;
-//   let hasPhweakRole = false;
-//   let hasNewRole = false;
-//   const Guild = client.guilds.cache.get(GuildID);
-//   Guild.members.cache.forEach((m) => {
-//     m.roles.cache.some((r) => {
-//       if (r.name.toLowerCase().includes("test1")) {
-//         hasKittenRole = true;
-//       } else if (r.name.toLowerCase().includes("test2")) {
-//         hasPhweakRole = true;
-//       } else if (r.name.toLowerCase().includes("Cub")) {
-//         hasNewRole = true;
-//       }
+//     console.log("Role Change...");
+//     let hasKittenRole = false;
+//     let hasPhweakRole = false;
+//     let hasNewRole = false;
+//     const Guild = client.guilds.cache.get(GuildID);
+//     Guild.members.cache.forEach((m) => {
+//         m.roles.cache.forEach((r) => {
+//             if (r.name.toLowerCase().includes("test1")) {
+//                 hasKittenRole = true;
+//             } else if (r.name.toLowerCase().includes("test2")) {
+//                 hasPhweakRole = true;
+//             } else if (r.name.toLowerCase().includes("Cub")) {
+//                 hasNewRole = true;
+//             }
+//         });
+//         let NewRole = m.guild.roles.cache.find((r2) => r2.name === "Cub");
+//         if (hasKittenRole && hasPhweakRole && !hasNewRole) {
+//             m.roles.add(NewRole);
+//         } else if (!hasKittenRole || !hasPhweakRole) {
+//             m.roles.remove(NewRole);
+//         }
 //     });
-//     let NewRole = m.guild.roles.cache.find((r2) => r2.name === "Cub");
-//     if (hasKittenRole && hasPhweakRole && !hasNewRole) {
-//       m.roles.add(NewRole);
-//     } else if (!hasKittenRole || !hasPhweakRole) {
-//       m.roles.remove(NewRole);
-//     }
-//   });
 // });
+// client.login(Token);
 
-client.login(Token);
 // Token Copy: MTAyMDE0NjE0MDc3MzEwNTcyNQ.GLiojV.A7u4twOvz0ssPiyvVlmIRjnDiYLBmfSYRjsTOA
