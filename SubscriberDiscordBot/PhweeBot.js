@@ -3,7 +3,7 @@ let GuildID = "988489593466810398";
 console.log("Loaded...");
 const { Client, GatewayIntentBits } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-client.once('roleUpdate', () => {
+client.on('roleUpdate', () => {
     let hasKittenRole = false;
     let hasPhweakRole = false;
     let hasNewRole = false;
