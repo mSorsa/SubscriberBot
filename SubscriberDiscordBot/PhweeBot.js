@@ -3,8 +3,8 @@ const S3 = new AWS.S3({
   MyToken: process.env.Token,
 });
 console.log(S3);
-console.log(S3.MyToken);
-console.log(S3[MyToken]);
+console.log(S3.config);
+console.log(S3.config.MyToken);
 let GuildID = "756364115437551637";
 console.log("Loaded...");
 const { Client, GatewayIntentBits } = require("discord.js");
@@ -52,7 +52,7 @@ async function SendMessage(LocalError) {
     Please go to https://www.heroku.com to check error logs.
   `);
 }
-client.login(S3.MyToken);
+client.login(S3.config.MyToken);
 
 //My Guild
 // let GuildID = "988489593466810398";
