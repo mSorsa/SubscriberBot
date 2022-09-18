@@ -2,7 +2,7 @@ const AWS = require("aws-sdk");
 let S3 = new AWS.S3({
   Token: process.env.Token,
 });
-console.log(S3.Token);
+console.log(Token);
 let GuildID = "756364115437551637";
 console.log("Loaded...");
 const { Client, GatewayIntentBits } = require("discord.js");
