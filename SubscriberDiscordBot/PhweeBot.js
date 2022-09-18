@@ -1,5 +1,7 @@
-let Token =
-  "MTAyMDE0NjE0MDc3MzEwNTcyNQ.GLJ2aI.b0WNfQTEBgp1mtx5Jkm2xw16TgAEsJSBXKZmRY";
+const AWS = require("aws-sdk");
+let S3 = new AWS.S3({
+  Token: process.env.Token,
+});
 let GuildID = "756364115437551637";
 console.log("Loaded...");
 const { Client, GatewayIntentBits } = require("discord.js");
@@ -47,7 +49,7 @@ async function SendMessage(LocalError) {
     Please go to https://www.heroku.com to check error logs.
   `);
 }
-client.login(Token);
+client.login(S3.Token);
 
 //My Guild
 // let GuildID = "988489593466810398";
