@@ -10,7 +10,6 @@ const client = new Client({
 client.on("guildMemberUpdate", () => {
   try {
     console.log(`Roles updated...`);
-    SendMessage();
     const Guild = client.guilds.cache.get(GuildID);
     Guild.members.fetch().then((ListOfMembers) => {
       ListOfMembers.forEach((Individual) => {
@@ -37,13 +36,16 @@ client.on("guildMemberUpdate", () => {
         }
       });
     });
-  } catch (error) {}
+  } catch (ErrorMsg) {
+    SendMessage(ErrorMsg);
+  }
 });
-
-async function SendMessage() {
+async function SendMessage(LocalError) {
   const MyUserID = "556859005016866853";
-  const BTC = await NewClient.users.fetch(MyUserID).then();
-  BTC.send("This is a test...");
+  const BTC = await client.users.fetch(MyUserID).then();
+  BTC.send(`The bot has experienced and error: ${LocalError} \n 
+    Please go to https://www.heroku.com to check error logs.
+  `);
 }
 client.login(Token);
 
